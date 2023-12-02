@@ -16,6 +16,6 @@ jobs:
     - name: Login into Docker Account
       run: docker login -u $DOCKER_USR -p $DOCKER_TKN
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag todo-cicd:$(date +%s)
+      run: docker build . --file Dockerfile --tag $DOCKER_USR/todo-cicd:$(date +%s)
     - name: Push the Docker image
       run: docker push $DOCKER_USR/todo-cicd:$(date +%s)
