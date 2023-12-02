@@ -8,8 +8,8 @@ on:
 jobs:
   build:
     env:
-      DOCKER_USR: ${{ secrets.DOCKER_USR }}
-      DOCKER_TKN: ${{ secrets.DOCKER_TKN }}
+      DOCKER_USR: ${{ env.DOCKER_USR }}
+      DOCKER_TKN: ${{ env.DOCKER_TKN }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
