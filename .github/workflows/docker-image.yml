@@ -18,17 +18,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag $DOCKER_USR/todo-cicd:$${{ GITHUB.SHA }}
     - name: Push the Docker image
-      run: docker push $DOCKER_USR/todo-cicd:$${{ GITHUB.SHA }}    
- deploy:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: hashicorp/setup-terraform@v2.0.3
-    - name: Validate
-      run: terraform validate /infrastructure
-    - name: Plan
-      run: terraform plan -chdir=/infrastructure -out "planfile" 
-    - name: Apply
-      run: terraform apply -chdir=/infrastructure planfile
+      run: docker push $DOCKER_USR/todo-cicd:$${{ GITHUB.SHA }}
 
           
       
