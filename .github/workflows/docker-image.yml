@@ -24,7 +24,7 @@ jobs:
   steps:
     - uses: hashicorp/setup-terraform@v2.0.3
     - name: Validate
-      run: terraform -chdir=/infrastructure validate 
+      run: terraform validate /infrastructure
     - name: Plan
       run: terraform plan -chdir=/infrastructure -out "planfile" 
     - name: Apply
