@@ -9,7 +9,7 @@ jobs:
  deploy:
   runs-on: ubuntu-latest
   env:
-    working-directory: /infrastructure
+    working-directory: ./infrastructure
   steps:
     - uses: hashicorp/setup-terraform@v2.0.3
     - name: Validate
