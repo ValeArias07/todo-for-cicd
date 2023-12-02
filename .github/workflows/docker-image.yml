@@ -6,7 +6,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+ build:
     env:
       DOCKER_USR: ${{ secrets.DOCKER_USR }}
       DOCKER_TKN: ${{ secrets.DOCKER_TKN }}
@@ -19,3 +19,7 @@ jobs:
       run: docker build . --file Dockerfile --tag $DOCKER_USR/todo-cicd:$${{ GITHUB.SHA }}
     - name: Push the Docker image
       run: docker push $DOCKER_USR/todo-cicd:$${{ GITHUB.SHA }}
+
+          
+      
+

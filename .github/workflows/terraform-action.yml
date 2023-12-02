@@ -1,0 +1,24 @@
+name: Terraform CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+ deploy:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: hashicorp/setup-terraform@v2.0.3
+    - name: Validate
+      run: terraform validate
+      working-directory: /home/runner/work/todo-for-cicd/todo-for-cicd/infrastructure
+      
+    - name: Plan
+      run: terraform plan -out "planfile" 
+      working-directory: /home/runner/work/todo-for-cicd/todo-for-cicd/infrastructure
+
+    - name: Apply
+      run: echo "terraform apply planfile"
+      working-directory: /home/runner/work/todo-for-cicd/todo-for-cicd/infrastructure
+
