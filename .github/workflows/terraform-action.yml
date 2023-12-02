@@ -13,9 +13,11 @@ jobs:
   steps:
     - uses: hashicorp/setup-terraform@v2.0.3
     - name: Validate
-      run: terraform validate 
-      working-directory: ${{ env.working-directory }}
-      
+      run: |
+            ls
+            cd ./infrastructure
+            terraform validate 
+            
     - name: Plan
       run: terraform plan -out "planfile" 
       working-directory: ${{ env.working-directory }}
