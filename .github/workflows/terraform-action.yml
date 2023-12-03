@@ -1,8 +1,10 @@
-name: Deploy Infrastructure
+name: Terraform CI
 on:
   push:
-    branches:
-      - master
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    
 jobs:
  deploy:
   runs-on: ubuntu-latest
