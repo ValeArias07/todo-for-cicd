@@ -38,9 +38,7 @@ jobs:
             }"
 
             echo variables > ./variables.tfvars
-    -name: Show directory
-    run: ls
-
+    
     - uses: hashicorp/setup-terraform@v2.0.3
     - name: Init
       run: terraform init -backend-config="access_key=${{ secrets.AWS_ACC_KEY }}" -backend-config="secret_key=${{ secrets.AWS_SECRET_KEY }}"
@@ -51,6 +49,7 @@ jobs:
       working-directory: ./infrastructure
       
     - name: Plan
+      run: ls
       run: terraform plan -out "planfile" -var-file=variables.tfvars
       working-directory: ./infrastructure
 
