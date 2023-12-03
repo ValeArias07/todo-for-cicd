@@ -1,13 +1,12 @@
 resource "aws_alb" "application_load_balancer" {
-  name               = "dendrogram-alb-dev"
+  name               = "app-alb"
   load_balancer_type = "application"
   subnets = [
     "${var.subnet_a_id}",
     "${var.subnet_b_id}"
   ]
-  security_groups = [aws_security_group.load_balancer_security_group["front_task"].id,
-  aws_security_group.load_balancer_security_group["back_task"].id]
-}
+  security_groups = [aws_security_group.load_balancer_security_group["front_task"].id]
+  }
 
 resource "aws_security_group" "load_balancer_security_group" {
   for_each = var.task_list

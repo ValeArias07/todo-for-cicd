@@ -1,4 +1,4 @@
-resource "aws_ecs_task_definition" "dendrogram-front-task" {
+resource "aws_ecs_task_definition" "front-task" {
   for_each                 = var.task_list
   family                   = each.value.name
   container_definitions    = <<DEFINITION
@@ -29,7 +29,7 @@ resource "aws_ecs_service" "service" {
   for_each        = var.task_list
   name            = each.value.name                                             # Name the service
   cluster         = var.cluster_id                              # Reference the created Cluster
-  task_definition = aws_ecs_task_definition.dendrogram-front-task[each.key].arn # Reference the task that the service will spin up
+  task_definition = aws_ecs_task_definition.front-task[each.key].arn # Reference the task that the service will spin up
   launch_type     = var.type_of_nodes
   desired_count   = 1 # Set up the number of containers to 3
 
