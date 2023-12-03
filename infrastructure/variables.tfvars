@@ -1,5 +1,5 @@
-access_key     = "${{ secret.AWS_ACC_KEY }}"
-secret_key     = "${{ secret.AWS_SECRET_KEY }}"
+access_key     = "${{ secrets.AWS_ACC_KEY }}"
+secret_key     = "${{ secrets.AWS_SECRET_KEY }}"
 project_region = "us-east-1"
 cluster_name   = "todo-cluster"
 type_of_nodes  = "FARGATE"
