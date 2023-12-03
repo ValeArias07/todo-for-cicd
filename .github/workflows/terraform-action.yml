@@ -38,8 +38,8 @@ jobs:
             }"
 
             echo variables > ./variables.tfvars
-    -name: Show directory
-    run: ls
+    - name: Show directory
+      run: ls
 
     - uses: hashicorp/setup-terraform@v2.0.3
     - name: Init
