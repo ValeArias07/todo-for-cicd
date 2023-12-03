@@ -4,7 +4,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-    
+
 jobs:
  deploy:
   runs-on: ubuntu-latest
@@ -15,12 +15,12 @@ jobs:
     - uses: hashicorp/setup-terraform@v2.0.3
     - name: Validate
       run: terraform validate
-      working-directory: /infrastructure
+      working-directory: ./infrastructure
       
     - name: Plan
       run: terraform plan -out "planfile" 
-      working-directory: /infrastructure
+      working-directory: ./infrastructure
 
     - name: Apply
       run: echo "terraform apply planfile"
-      working-directory: /infrastructure
+      working-directory: ./infrastructure
