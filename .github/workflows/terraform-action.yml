@@ -49,8 +49,9 @@ jobs:
       working-directory: ./infrastructure
       
     - name: Plan
-      run: ls
-      run: terraform plan -out "planfile" -var-file=variables.tfvars
+      run: |
+           ls
+           terraform plan -out "planfile" -var-file=variables.tfvars
       working-directory: ./infrastructure
 
     - name: Apply
