@@ -16,9 +16,9 @@ jobs:
     - name: Login into Docker Account
       run: docker login -u $DOCKER_USR -p $DOCKER_TKN
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $DOCKER_USR/todo-cicd:$${{ GITHUB.SHA }}
+      run: docker build . --file Dockerfile --tag $DOCKER_USR/todo-cicd:${{ GITHUB.SHA }}
     - name: Push the Docker image
-      run: docker push $DOCKER_USR/todo-cicd:$${{ GITHUB.SHA }}
+      run: docker push $DOCKER_USR/todo-cicd:${{ GITHUB.SHA }}
 
           
       
