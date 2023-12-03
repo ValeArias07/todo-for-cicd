@@ -11,6 +11,34 @@ jobs:
   steps:
     - name: Check out code
       uses: actions/checkout@v2
+
+    - name: Write variables
+      run: |
+            variables="
+            access_key     = \"${{ secret.AWS_ACC_KEY }}\"
+            secret_key     = \"${{ secret.AWS_SECRET_KEY }}\"
+            project_region = \"us-east-1\"
+            cluster_name   = \"dendrogram_cluster\"
+            type_of_nodes  = \"FARGATE\"
+            iam_policy_arn = [
+              \"arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy\"
+            , \"arn:aws:iam::aws:policy/AWSCodeDeployRoleForECS\"
+            ]
+            task_list = {
+            front_task = {
+              name           = \"front-task\",
+              service        = \"front-service\",
+              image_uri      = \"422938382330.dkr.ecr.us-east-1.amazonaws.com/dendrogram-app:${FRONT_VERSION}\",
+              container_port = 8080,
+              host_port      = 8080,
+              tg_port        = 80,
+              protocol       = \"HTTP\",
+              desired_count  = 1
+            } 
+            }"
+
+            echo variables > variables.tfvars
+
       
     - uses: hashicorp/setup-terraform@v2.0.3
     - name: Init
