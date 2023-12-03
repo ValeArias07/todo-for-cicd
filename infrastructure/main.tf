@@ -2,7 +2,7 @@
 terraform {
   backend "s3" {
     bucket = "todo-ops-tf"
-    key    = "todo/state/terraform.tfstate"
+    key    = "state/terraform.tfstate"
     region = "us-east-1"
   }
   required_providers {

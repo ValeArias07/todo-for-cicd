@@ -1,24 +1,41 @@
-name: Terraform CI
+name: Deploy Infrastructure
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
+    branches:
+      - master
 jobs:
- deploy:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: hashicorp/setup-terraform@v2.0.3
-    - name: Validate
-      run: terraform validate
-      working-directory: /home/runner/work/todo-for-cicd/todo-for-cicd/infrastructure
-      
-    - name: Plan
-      run: terraform plan -out "planfile" 
-      working-directory: /home/runner/work/todo-for-cicd/todo-for-cicd/infrastructure
+  tf_fmt:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
 
-    - name: Apply
-      run: echo "terraform apply planfile"
-      working-directory: /home/runner/work/todo-for-cicd/todo-for-cicd/infrastructure
+    - name: Checkout Repo
+      uses: actions/checkout@v1
 
+    - name: Terraform Init
+      uses: hashicorp/terraform-github-actions/init@v0.4.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_ACTION_WORKING_DIR: 'infrastructure'
+        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: Terraform Validate
+      uses: hashicorp/terraform-github-actions/validate@v0.3.7
+
+    - name: Terraform Apply
+      uses: hashicorp/terraform-github-actions/apply@v0.4.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TF_ACTION_WORKING_DIR: 'infrastructure'
+        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: Sync S3
+      uses: jakejarvis/s3-sync-action@master
+      env:
+        SOURCE_DIR: './src'
+        AWS_REGION: 'us-east-1'
+        AWS_S3_BUCKET: 'todo-ops-tf'
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
