@@ -8,12 +8,9 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-
-    - name: Checkout Repo
-      uses: actions/checkout@v1
-
     - name: Terraform Init
       uses: hashicorp/terraform-github-actions/init@v0.4.0
+      
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: 'infrastructure'
