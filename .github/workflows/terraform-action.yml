@@ -14,7 +14,7 @@ jobs:
       
     - uses: hashicorp/setup-terraform@v2.0.3
     - name: Init
-      run: terraform init -backend-config="access_key="{{ secrets.AWS_ACC_KEY }} -backend-config="secret_key="{{ secrets.AWS_SECRET_KEY }} -backend-config="region=us-east-1"
+      run: terraform init -backend-config="access_key={{ secrets.AWS_ACC_KEY }}" -backend-config="secret_key={{ secrets.AWS_SECRET_KEY }}"
       working-directory: ./infrastructure
       
     - name: Validate
