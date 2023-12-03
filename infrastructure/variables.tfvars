@@ -7,7 +7,8 @@ iam_policy_arn = [
   "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 , "arn:aws:iam::aws:policy/AWSCodeDeployRoleForECS"
 ]
-"task_list = {
+
+task_list = {
       front_task = {
         name           = "todo-front",
         service        = "todo-service",
