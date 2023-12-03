@@ -14,8 +14,8 @@ jobs:
 
     - name: Exchange secrets
       run: |
-           sed -i 's/AWS_ACC_KEY/${{ secrets.AWS_ACC_KEY }}/g' variables.tfvars
-           sed -i 's/AWS_SECRET_KEY/${{ secrets.AWS_SECRET_KEY }}/g' variables.tfvars    
+           sed -i 's|AWS_ACC_KEY|${{ secrets.AWS_ACC_KEY }}|g' variables.tfvars
+           sed -i 's|AWS_SECRET_KEY|${{ secrets.AWS_SECRET_KEY }}|g' variables.tfvars    
       working-directory: ./infrastructure
 
     - name: Init
