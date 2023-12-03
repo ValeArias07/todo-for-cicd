@@ -22,9 +22,9 @@ jobs:
       working-directory: ./infrastructure
       
     - name: Plan
-      run: terraform plan -out "planfile" tfvars=variables.tfvars
+      run: terraform plan -out "planfile" -var-file=variables.tfvars
       working-directory: ./infrastructure
 
     - name: Apply
-      run: echo "terraform apply planfile" tfvars=variables.tfvars
+      run: echo "terraform apply planfile" -var-file=variables.tfvars
       working-directory: ./infrastructure
