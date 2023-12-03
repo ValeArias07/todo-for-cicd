@@ -1,0 +1,13 @@
+name: Terraform CI
+on: workflow_dispatch
+
+jobs:
+ deploy:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Destroy
+      run: terraform destroy -var-file=variables.tfvars
+      working-directory: ./infrastructure
