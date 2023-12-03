@@ -12,6 +12,7 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
+    - uses: hashicorp/setup-terraform@v2.0.3
     - name: Write variables
       run: |
             variables="
@@ -39,7 +40,6 @@ jobs:
 
             echo variables > ./variables.tfvars
     
-    - uses: hashicorp/setup-terraform@v2.0.3
     - name: Init
       run: terraform init -backend-config="access_key=${{ secrets.AWS_ACC_KEY }}" -backend-config="secret_key=${{ secrets.AWS_SECRET_KEY }}"
       working-directory: ./infrastructure
