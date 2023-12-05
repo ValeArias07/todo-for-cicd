@@ -36,5 +36,5 @@ jobs:
       working-directory: ./infrastructure
 
     - name: Apply
-      run: echo "terraform apply planfile"
+      run: terraform apply planfile
       working-directory: ./infrastructure
